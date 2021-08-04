@@ -1,7 +1,0 @@
-{
-  "name" : "dev",
-  "configurations" : {
-    "type" : "record",
-    "fields" : [ ]
-  }
-}
