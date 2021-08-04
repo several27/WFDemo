@@ -1,0 +1,53 @@
+{
+  "datasetId" : "3355",
+  "schema" : {
+    "fields" : [ {
+      "name" : "order_id",
+      "type" : "integer",
+      "nullable" : true,
+      "metadata" : { }
+    }, {
+      "name" : "customer_id",
+      "type" : "integer",
+      "nullable" : true,
+      "metadata" : { }
+    }, {
+      "name" : "order_status",
+      "type" : "string",
+      "nullable" : true,
+      "metadata" : { }
+    }, {
+      "name" : "order_category",
+      "type" : "string",
+      "nullable" : true,
+      "metadata" : { }
+    }, {
+      "name" : "order_date",
+      "type" : "string",
+      "nullable" : true,
+      "metadata" : { }
+    }, {
+      "name" : "amount",
+      "type" : "double",
+      "nullable" : true,
+      "metadata" : { }
+    } ],
+    "type" : "struct"
+  },
+  "datasetMode" : "batch",
+  "datasetType" : "File",
+  "description" : "",
+  "commonProperties" : {
+    "properties" : {
+      "location" : "dbfs:/DatabricksSession/OrdersDatasetInput.csv"
+    }
+  },
+  "dataFormat" : "csv",
+  "inputProperties" : {
+    "properties" : {
+      "sep" : ",",
+      "header" : "true",
+      "inferSchema" : "true"
+    }
+  }
+}
