@@ -1,0 +1,144 @@
+{
+  "resolvers" : [ ],
+  "graph" : {
+    "metainfo" : {
+      "cluster" : "local",
+      "id" : "DemoWorkflow",
+      "memory" : 1,
+      "mode" : "batch",
+      "processors" : 1,
+      "language" : "scala",
+      "imported" : true,
+      "interimMode" : "full",
+      "codeMode" : "sparse",
+      "buildSystem" : "maven"
+    },
+    "connections" : [ {
+      "metadata" : {
+        "route" : "e_rJV4VQ_1F"
+      },
+      "src" : {
+        "port" : "out",
+        "process" : "Customers"
+      },
+      "tgt" : {
+        "port" : "left",
+        "process" : "ByCustomerId"
+      }
+    }, {
+      "metadata" : {
+        "route" : "e_HkU44QOyt"
+      },
+      "src" : {
+        "port" : "out",
+        "process" : "Orders"
+      },
+      "tgt" : {
+        "port" : "right",
+        "process" : "ByCustomerId"
+      }
+    } ],
+    "groups" : [ ],
+    "inports" : { },
+    "outports" : { },
+    "processes" : {
+      "Customers" : {
+        "component" : "Source",
+        "metadata" : {
+          "label" : "Customers",
+          "x" : 193,
+          "y" : 111
+        },
+        "ports" : {
+          "inputs" : [ ],
+          "outputs" : [ "out" ]
+        },
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "id" : "3354",
+          "version" : 0
+        }
+      },
+      "Orders" : {
+        "component" : "Source",
+        "metadata" : {
+          "label" : "Orders",
+          "x" : 190,
+          "y" : 267
+        },
+        "ports" : {
+          "inputs" : [ ],
+          "outputs" : [ "out" ]
+        },
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "id" : "3355",
+          "version" : 0
+        }
+      },
+      "ByCustomerId" : {
+        "component" : "Join",
+        "metadata" : {
+          "label" : "ByCustomerId",
+          "x" : 391,
+          "y" : 200
+        },
+        "ports" : {
+          "inputs" : [ "left", "right" ],
+          "outputs" : [ "out" ]
+        },
+        "properties" : {
+          "phase" : 0,
+          "joinCondition" : {
+            "expr" : "col(\"left.customer_id\") === col(\"right.customer_id\")",
+            "format" : "scala"
+          },
+          "selectColumns" : [ {
+            "targetCol" : "first_name",
+            "expression" : {
+              "expr" : "col(\"left.first_name\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "last_name",
+            "expression" : {
+              "expr" : "col(\"left.last_name\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "phone",
+            "expression" : {
+              "expr" : "col(\"left.phone\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "order_id",
+            "expression" : {
+              "expr" : "col(\"right.order_id\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "customer_id",
+            "expression" : {
+              "expr" : "col(\"right.customer_id\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "order_status",
+            "expression" : {
+              "expr" : "col(\"right.order_status\")",
+              "format" : "scala"
+            }
+          } ],
+          "detailedStats" : false,
+          "cache" : false,
+          "udf_definitions" : [ ],
+          "joinType" : "inner",
+          "limit" : 0
+        }
+      }
+    }
+  }
+}

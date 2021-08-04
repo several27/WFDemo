@@ -1,0 +1,153 @@
+{
+  "graph" : {
+    "processes" : {
+      "Customers" : {
+        "component" : "Source",
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "id" : "3354",
+          "version" : 0
+        },
+        "metadata" : {
+          "label" : "Customers",
+          "x" : 193,
+          "y" : 111
+        },
+        "ports" : {
+          "inputs" : [ ],
+          "outputs" : [ "out" ]
+        },
+        "lineage" : ""
+      },
+      "Orders" : {
+        "component" : "Source",
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "id" : "3355",
+          "version" : 0
+        },
+        "metadata" : {
+          "label" : "Orders",
+          "x" : 190,
+          "y" : 267
+        },
+        "ports" : {
+          "inputs" : [ ],
+          "outputs" : [ "out" ]
+        },
+        "lineage" : ""
+      },
+      "ByCustomerId" : {
+        "component" : "Join",
+        "properties" : {
+          "udf_definitions" : [ ],
+          "limit" : 0,
+          "cache" : false,
+          "detailedStats" : false,
+          "phase" : 0,
+          "joinType" : "inner",
+          "joinCondition" : {
+            "expr" : "col(\"left.customer_id\") === col(\"right.customer_id\")",
+            "format" : "scala"
+          },
+          "selectColumns" : [ {
+            "targetCol" : "first_name",
+            "expression" : {
+              "expr" : "col(\"left.first_name\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "last_name",
+            "expression" : {
+              "expr" : "col(\"left.last_name\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "phone",
+            "expression" : {
+              "expr" : "col(\"left.phone\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "order_id",
+            "expression" : {
+              "expr" : "col(\"right.order_id\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "customer_id",
+            "expression" : {
+              "expr" : "col(\"right.customer_id\")",
+              "format" : "scala"
+            }
+          }, {
+            "targetCol" : "order_status",
+            "expression" : {
+              "expr" : "col(\"right.order_status\")",
+              "format" : "scala"
+            }
+          } ]
+        },
+        "metadata" : {
+          "label" : "ByCustomerId",
+          "x" : 391,
+          "y" : 200
+        },
+        "ports" : {
+          "inputs" : [ "left", "right" ],
+          "outputs" : [ "out" ]
+        },
+        "lineage" : ""
+      }
+    },
+    "connections" : [ {
+      "src" : {
+        "process" : "Customers",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "ByCustomerId",
+        "port" : "left"
+      },
+      "metadata" : {
+        "route" : "e_rJV4VQ_1F"
+      },
+      "lineage" : ""
+    }, {
+      "src" : {
+        "process" : "Orders",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "ByCustomerId",
+        "port" : "right"
+      },
+      "metadata" : {
+        "route" : "e_HkU44QOyt"
+      },
+      "lineage" : ""
+    } ],
+    "groups" : [ ],
+    "locked" : false,
+    "metainfo" : {
+      "lastUpdated" : 1628087388797,
+      "id" : "DemoWorkflow",
+      "memory" : 1,
+      "imported" : true,
+      "language" : "scala",
+      "processors" : 1,
+      "cluster" : "local",
+      "mode" : "batch",
+      "interimMode" : "full",
+      "udfs" : null,
+      "codeMode" : "sparse",
+      "buildSystem" : "maven",
+      "udafs" : null,
+      "sparkOptions" : null
+    },
+    "inports" : { },
+    "outports" : { }
+  }
+}
