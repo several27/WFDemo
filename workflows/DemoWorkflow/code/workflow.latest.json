@@ -11,54 +11,68 @@
           "detailedStats" : false,
           "udf_definitions" : [ ],
           "functions" : [ {
+            "addReplaceColumn" : "first_name",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "first_name"
             } ],
-            "enabled" : true,
-            "addReplaceColumn" : "first_name"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "last_name",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "last_name"
             } ],
-            "enabled" : true,
-            "addReplaceColumn" : "last_name"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "phone",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "phone"
             } ],
-            "enabled" : true,
-            "addReplaceColumn" : "phone"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "order_id",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "order_id"
             } ],
-            "enabled" : true,
-            "addReplaceColumn" : "order_id"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "customer_id",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "customer_id"
             } ],
-            "enabled" : true,
-            "addReplaceColumn" : "customer_id"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "order_status",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "order_status"
             } ],
-            "enabled" : true,
-            "addReplaceColumn" : "order_status"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "full_name",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "concat(first_name, ' - ', last_name)"
             } ],
-            "enabled" : true,
-            "addReplaceColumn" : "full_name"
+            "comment" : null,
+            "enabled" : true
           } ],
           "limit" : 0
         },
@@ -340,7 +354,7 @@
     "groups" : [ ],
     "locked" : false,
     "metainfo" : {
-      "lastUpdated" : 1628087702754,
+      "lastUpdated" : 1628087798961,
       "id" : "id",
       "memory" : 1,
       "imported" : true,
