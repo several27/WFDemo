@@ -20,6 +20,7 @@ object Main {
     val df_ByCustomerId: Join      = ByCustomerId(spark, df_Customers, df_Orders)
     val df_AddFullName:  Reformat  = AddFullName(spark,  df_ByCustomerId)
     val df_Aggregate0:   Aggregate = Aggregate0(spark,   df_AddFullName)
+    Report(spark, df_Aggregate0)
 
   }
 

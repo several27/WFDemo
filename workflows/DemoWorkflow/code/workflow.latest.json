@@ -106,52 +106,73 @@
       },
       "AddFullName" : {
         "component" : "Reformat",
+        "group" : null,
         "properties" : {
           "interim" : true,
           "cache" : false,
           "functions" : [ {
+            "addReplaceColumn" : "first_name",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "first_name"
             } ],
-            "addReplaceColumn" : "first_name"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "last_name",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "last_name"
             } ],
-            "addReplaceColumn" : "last_name"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "phone",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "phone"
             } ],
-            "addReplaceColumn" : "phone"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "order_id",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "order_id"
             } ],
-            "addReplaceColumn" : "order_id"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "customer_id",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "customer_id"
             } ],
-            "addReplaceColumn" : "customer_id"
+            "comment" : null,
+            "enabled" : true
           }, {
+            "addReplaceColumn" : "order_status",
+            "functionName" : null,
             "inputArgs" : [ {
               "type" : "sql",
               "expr" : "order_status"
             } ],
-            "addReplaceColumn" : "order_status"
+            "comment" : null,
+            "enabled" : true
           }, {
             "addReplaceColumn" : "full_name",
             "functionName" : "column_expression",
             "inputArgs" : [ {
               "expr" : "CONCAT(first_name, last_name)",
               "type" : "sql"
-            } ]
+            } ],
+            "comment" : null,
+            "enabled" : true
           } ]
         },
         "metadata" : {
@@ -167,6 +188,7 @@
       },
       "Aggregate0" : {
         "component" : "Aggregate",
+        "group" : null,
         "properties" : {
           "interim" : false,
           "cache" : false,
@@ -218,6 +240,25 @@
         "ports" : {
           "inputs" : [ "in" ],
           "outputs" : [ "out" ]
+        },
+        "lineage" : ""
+      },
+      "Report" : {
+        "component" : "Target",
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "id" : "3356",
+          "version" : 0
+        },
+        "metadata" : {
+          "label" : "Report",
+          "x" : 866,
+          "y" : 203
+        },
+        "ports" : {
+          "inputs" : [ "in" ],
+          "outputs" : [ ]
         },
         "lineage" : ""
       }
@@ -274,11 +315,24 @@
         "route" : "e_SJGTNmdyY"
       },
       "lineage" : ""
+    }, {
+      "src" : {
+        "process" : "Aggregate0",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "Report",
+        "port" : "in"
+      },
+      "metadata" : {
+        "route" : "e_Syg1SQdyY"
+      },
+      "lineage" : ""
     } ],
     "groups" : [ ],
     "locked" : false,
     "metainfo" : {
-      "lastUpdated" : 1628087503062,
+      "lastUpdated" : 1628087551842,
       "id" : "DemoWorkflow",
       "memory" : 1,
       "imported" : true,
