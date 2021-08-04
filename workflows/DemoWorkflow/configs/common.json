@@ -1,0 +1,15 @@
+{
+  "name" : "common",
+  "configurations" : {
+    "type" : "record",
+    "fields" : [ {
+      "name" : "column_name",
+      "comment" : "",
+      "optional" : false,
+      "kind" : {
+        "value" : "asd",
+        "type" : "string"
+      }
+    } ]
+  }
+}
