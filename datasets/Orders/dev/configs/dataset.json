@@ -1,6 +1,11 @@
 {
+  "description" : "",
   "datasetId" : "3355",
+  "dataFormat" : "csv",
+  "datasetType" : "File",
+  "datasetMode" : "batch",
   "schema" : {
+    "type" : "struct",
     "fields" : [ {
       "name" : "order_id",
       "type" : "integer",
@@ -31,23 +36,17 @@
       "type" : "double",
       "nullable" : true,
       "metadata" : { }
-    } ],
-    "type" : "struct"
+    } ]
   },
-  "datasetMode" : "batch",
-  "datasetType" : "File",
-  "description" : "",
   "commonProperties" : {
     "properties" : {
       "location" : "dbfs:/DatabricksSession/OrdersDatasetInput.csv"
     }
   },
-  "dataFormat" : "csv",
   "inputProperties" : {
     "properties" : {
       "sep" : ",",
-      "header" : "true",
-      "inferSchema" : "true"
+      "header" : true
     }
   }
 }

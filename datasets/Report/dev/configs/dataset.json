@@ -1,5 +1,9 @@
 {
+  "description" : "",
   "datasetId" : "3356",
+  "dataFormat" : "parquet",
+  "datasetType" : "File",
+  "datasetMode" : "batch",
   "schema" : {
     "type" : "struct",
     "fields" : [ {
@@ -34,15 +38,11 @@
       "metadata" : { }
     } ]
   },
-  "datasetMode" : "batch",
-  "datasetType" : "File",
-  "description" : "",
   "commonProperties" : {
     "properties" : {
       "location" : "dbfs:/DatabricksSession/Report.parqq"
     }
   },
-  "dataFormat" : "parquet",
   "outputProperties" : {
     "properties" : {
       "mode" : "overwrite"

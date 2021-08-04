@@ -1,6 +1,11 @@
 {
+  "description" : "",
   "datasetId" : "3354",
+  "dataFormat" : "csv",
+  "datasetType" : "File",
+  "datasetMode" : "batch",
   "schema" : {
+    "type" : "struct",
     "fields" : [ {
       "name" : "customer_id",
       "type" : "integer",
@@ -41,23 +46,17 @@
       "type" : "string",
       "nullable" : true,
       "metadata" : { }
-    } ],
-    "type" : "struct"
+    } ]
   },
-  "datasetMode" : "batch",
-  "datasetType" : "File",
-  "description" : "",
   "commonProperties" : {
     "properties" : {
       "location" : "dbfs:/DatabricksSession/CustomersDatasetInput.csv"
     }
   },
-  "dataFormat" : "csv",
   "inputProperties" : {
     "properties" : {
       "sep" : ",",
-      "header" : "true",
-      "inferSchema" : "true"
+      "header" : true
     }
   }
 }
