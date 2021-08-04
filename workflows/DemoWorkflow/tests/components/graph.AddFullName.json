@@ -1,0 +1,37 @@
+{
+  "tests" : [ {
+    "name" : "Unit test 0",
+    "data" : {
+      "in" : {
+        "schema" : {
+          "type" : "struct",
+          "fields" : [ {
+            "name" : "first_name",
+            "type" : "string",
+            "nullable" : true,
+            "metadata" : { }
+          }, {
+            "name" : "last_name",
+            "type" : "string",
+            "nullable" : true,
+            "metadata" : { }
+          } ]
+        },
+        "values" : [ [ "Steve", "Jobs" ] ]
+      },
+      "out" : {
+        "schema" : {
+          "type" : "struct",
+          "fields" : [ {
+            "name" : "full_name",
+            "type" : "string",
+            "nullable" : true,
+            "metadata" : { }
+          } ]
+        },
+        "predicates" : [ ],
+        "values" : [ [ "Steve - Jobs" ] ]
+      }
+    }
+  } ]
+}

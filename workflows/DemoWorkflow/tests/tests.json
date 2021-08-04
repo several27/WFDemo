@@ -1,0 +1,7 @@
+{
+  "tests" : [ {
+    "test" : "graph.AddFullName",
+    "dataFile" : "graph.AddFullName.json",
+    "outPort" : "out"
+  } ]
+}
