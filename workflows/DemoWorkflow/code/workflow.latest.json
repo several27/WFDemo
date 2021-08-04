@@ -3,6 +3,7 @@
     "processes" : {
       "Customers" : {
         "component" : "Source",
+        "group" : null,
         "properties" : {
           "interim" : false,
           "cache" : false,
@@ -22,6 +23,7 @@
       },
       "Orders" : {
         "component" : "Source",
+        "group" : null,
         "properties" : {
           "interim" : false,
           "cache" : false,
@@ -41,6 +43,7 @@
       },
       "ByCustomerId" : {
         "component" : "Join",
+        "group" : null,
         "properties" : {
           "udf_definitions" : [ ],
           "limit" : 0,
@@ -100,6 +103,123 @@
           "outputs" : [ "out" ]
         },
         "lineage" : ""
+      },
+      "AddFullName" : {
+        "component" : "Reformat",
+        "properties" : {
+          "interim" : true,
+          "cache" : false,
+          "functions" : [ {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "first_name"
+            } ],
+            "addReplaceColumn" : "first_name"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "last_name"
+            } ],
+            "addReplaceColumn" : "last_name"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "phone"
+            } ],
+            "addReplaceColumn" : "phone"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "order_id"
+            } ],
+            "addReplaceColumn" : "order_id"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "customer_id"
+            } ],
+            "addReplaceColumn" : "customer_id"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "order_status"
+            } ],
+            "addReplaceColumn" : "order_status"
+          }, {
+            "addReplaceColumn" : "full_name",
+            "functionName" : "column_expression",
+            "inputArgs" : [ {
+              "expr" : "CONCAT(first_name, last_name)",
+              "type" : "sql"
+            } ]
+          } ]
+        },
+        "metadata" : {
+          "label" : "AddFullName",
+          "x" : 554,
+          "y" : 201
+        },
+        "ports" : {
+          "inputs" : [ "in" ],
+          "outputs" : [ "out" ]
+        },
+        "lineage" : ""
+      },
+      "Aggregate0" : {
+        "component" : "Aggregate",
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "aggcols" : [ {
+            "targetCol" : "orders",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "count(order_id)"
+            }
+          } ],
+          "columns" : [ {
+            "targetCol" : "first_name",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "first_name"
+            }
+          }, {
+            "targetCol" : "last_name",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "last_name"
+            }
+          }, {
+            "targetCol" : "phone",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "phone"
+            }
+          }, {
+            "targetCol" : "customer_id",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "customer_id"
+            }
+          }, {
+            "targetCol" : "full_name",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "full_name"
+            }
+          } ],
+          "opType" : "groupBy"
+        },
+        "metadata" : {
+          "label" : "Aggregate0",
+          "x" : 707,
+          "y" : 200
+        },
+        "ports" : {
+          "inputs" : [ "in" ],
+          "outputs" : [ "out" ]
+        },
+        "lineage" : ""
       }
     },
     "connections" : [ {
@@ -128,11 +248,37 @@
         "route" : "e_HkU44QOyt"
       },
       "lineage" : ""
+    }, {
+      "src" : {
+        "process" : "ByCustomerId",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "AddFullName",
+        "port" : "in"
+      },
+      "metadata" : {
+        "route" : "e_SyFdEQdJt"
+      },
+      "lineage" : ""
+    }, {
+      "src" : {
+        "process" : "AddFullName",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "Aggregate0",
+        "port" : "in"
+      },
+      "metadata" : {
+        "route" : "e_SJGTNmdyY"
+      },
+      "lineage" : ""
     } ],
     "groups" : [ ],
     "locked" : false,
     "metainfo" : {
-      "lastUpdated" : 1628087388797,
+      "lastUpdated" : 1628087503062,
       "id" : "DemoWorkflow",
       "memory" : 1,
       "imported" : true,

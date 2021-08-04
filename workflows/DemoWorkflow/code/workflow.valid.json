@@ -1,49 +1,15 @@
 {
-  "resolvers" : [ ],
   "graph" : {
-    "metainfo" : {
-      "cluster" : "local",
-      "id" : "DemoWorkflow",
-      "memory" : 1,
-      "mode" : "batch",
-      "processors" : 1,
-      "language" : "scala",
-      "imported" : true,
-      "interimMode" : "full",
-      "codeMode" : "sparse",
-      "buildSystem" : "maven"
-    },
-    "connections" : [ {
-      "metadata" : {
-        "route" : "e_rJV4VQ_1F"
-      },
-      "src" : {
-        "port" : "out",
-        "process" : "Customers"
-      },
-      "tgt" : {
-        "port" : "left",
-        "process" : "ByCustomerId"
-      }
-    }, {
-      "metadata" : {
-        "route" : "e_HkU44QOyt"
-      },
-      "src" : {
-        "port" : "out",
-        "process" : "Orders"
-      },
-      "tgt" : {
-        "port" : "right",
-        "process" : "ByCustomerId"
-      }
-    } ],
-    "groups" : [ ],
-    "inports" : { },
-    "outports" : { },
     "processes" : {
       "Customers" : {
         "component" : "Source",
+        "group" : null,
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "id" : "3354",
+          "version" : 0
+        },
         "metadata" : {
           "label" : "Customers",
           "x" : 193,
@@ -53,15 +19,17 @@
           "inputs" : [ ],
           "outputs" : [ "out" ]
         },
-        "properties" : {
-          "interim" : false,
-          "cache" : false,
-          "id" : "3354",
-          "version" : 0
-        }
+        "lineage" : ""
       },
       "Orders" : {
         "component" : "Source",
+        "group" : null,
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "id" : "3355",
+          "version" : 0
+        },
         "metadata" : {
           "label" : "Orders",
           "x" : 190,
@@ -71,26 +39,18 @@
           "inputs" : [ ],
           "outputs" : [ "out" ]
         },
-        "properties" : {
-          "interim" : false,
-          "cache" : false,
-          "id" : "3355",
-          "version" : 0
-        }
+        "lineage" : ""
       },
       "ByCustomerId" : {
         "component" : "Join",
-        "metadata" : {
-          "label" : "ByCustomerId",
-          "x" : 391,
-          "y" : 200
-        },
-        "ports" : {
-          "inputs" : [ "left", "right" ],
-          "outputs" : [ "out" ]
-        },
+        "group" : null,
         "properties" : {
+          "udf_definitions" : [ ],
+          "limit" : 0,
+          "cache" : false,
+          "detailedStats" : false,
           "phase" : 0,
+          "joinType" : "inner",
           "joinCondition" : {
             "expr" : "col(\"left.customer_id\") === col(\"right.customer_id\")",
             "format" : "scala"
@@ -131,14 +91,209 @@
               "expr" : "col(\"right.order_status\")",
               "format" : "scala"
             }
-          } ],
-          "detailedStats" : false,
+          } ]
+        },
+        "metadata" : {
+          "label" : "ByCustomerId",
+          "x" : 391,
+          "y" : 200
+        },
+        "ports" : {
+          "inputs" : [ "left", "right" ],
+          "outputs" : [ "out" ]
+        },
+        "lineage" : ""
+      },
+      "AddFullName" : {
+        "component" : "Reformat",
+        "properties" : {
+          "interim" : true,
           "cache" : false,
-          "udf_definitions" : [ ],
-          "joinType" : "inner",
-          "limit" : 0
-        }
+          "functions" : [ {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "first_name"
+            } ],
+            "addReplaceColumn" : "first_name"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "last_name"
+            } ],
+            "addReplaceColumn" : "last_name"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "phone"
+            } ],
+            "addReplaceColumn" : "phone"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "order_id"
+            } ],
+            "addReplaceColumn" : "order_id"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "customer_id"
+            } ],
+            "addReplaceColumn" : "customer_id"
+          }, {
+            "inputArgs" : [ {
+              "type" : "sql",
+              "expr" : "order_status"
+            } ],
+            "addReplaceColumn" : "order_status"
+          }, {
+            "addReplaceColumn" : "full_name",
+            "functionName" : "column_expression",
+            "inputArgs" : [ {
+              "expr" : "CONCAT(first_name, last_name)",
+              "type" : "sql"
+            } ]
+          } ]
+        },
+        "metadata" : {
+          "label" : "AddFullName",
+          "x" : 554,
+          "y" : 201
+        },
+        "ports" : {
+          "inputs" : [ "in" ],
+          "outputs" : [ "out" ]
+        },
+        "lineage" : ""
+      },
+      "Aggregate0" : {
+        "component" : "Aggregate",
+        "properties" : {
+          "interim" : false,
+          "cache" : false,
+          "aggcols" : [ {
+            "targetCol" : "orders",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "count(order_id)"
+            }
+          } ],
+          "columns" : [ {
+            "targetCol" : "first_name",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "first_name"
+            }
+          }, {
+            "targetCol" : "last_name",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "last_name"
+            }
+          }, {
+            "targetCol" : "phone",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "phone"
+            }
+          }, {
+            "targetCol" : "customer_id",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "customer_id"
+            }
+          }, {
+            "targetCol" : "full_name",
+            "expression" : {
+              "format" : "sql",
+              "expr" : "full_name"
+            }
+          } ],
+          "opType" : "groupBy"
+        },
+        "metadata" : {
+          "label" : "Aggregate0",
+          "x" : 707,
+          "y" : 200
+        },
+        "ports" : {
+          "inputs" : [ "in" ],
+          "outputs" : [ "out" ]
+        },
+        "lineage" : ""
       }
-    }
+    },
+    "connections" : [ {
+      "src" : {
+        "process" : "Customers",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "ByCustomerId",
+        "port" : "left"
+      },
+      "metadata" : {
+        "route" : "e_rJV4VQ_1F"
+      },
+      "lineage" : ""
+    }, {
+      "src" : {
+        "process" : "Orders",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "ByCustomerId",
+        "port" : "right"
+      },
+      "metadata" : {
+        "route" : "e_HkU44QOyt"
+      },
+      "lineage" : ""
+    }, {
+      "src" : {
+        "process" : "ByCustomerId",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "AddFullName",
+        "port" : "in"
+      },
+      "metadata" : {
+        "route" : "e_SyFdEQdJt"
+      },
+      "lineage" : ""
+    }, {
+      "src" : {
+        "process" : "AddFullName",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "Aggregate0",
+        "port" : "in"
+      },
+      "metadata" : {
+        "route" : "e_SJGTNmdyY"
+      },
+      "lineage" : ""
+    } ],
+    "groups" : [ ],
+    "locked" : false,
+    "metainfo" : {
+      "lastUpdated" : 1628087503062,
+      "id" : "DemoWorkflow",
+      "memory" : 1,
+      "imported" : true,
+      "language" : "scala",
+      "processors" : 1,
+      "cluster" : "local",
+      "mode" : "batch",
+      "interimMode" : "full",
+      "udfs" : null,
+      "codeMode" : "sparse",
+      "buildSystem" : "maven",
+      "udafs" : null,
+      "sparkOptions" : null
+    },
+    "inports" : { },
+    "outports" : { }
   }
 }

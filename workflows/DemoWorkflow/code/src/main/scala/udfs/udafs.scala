@@ -53,13 +53,12 @@ import org.apache.spark.sql._
   *
   */
 
-object UDAFs {
 
+object UDAFs {
   /**
     * Registers UDAFs with Spark SQL
     */
   def registerUDAFs(spark: SparkSession): Unit = {
-
     /**
       * Example:
       *
@@ -67,6 +66,6 @@ object UDAFs {
       *
       */
 
-  }
 
+  }
 }
