@@ -23,7 +23,7 @@ object AddFullName {
       col("order_id"),
       col("customer_id"),
       col("order_status"),
-      concat(col("first_name"), col("last_name")).as("full_name")
+      concat(col("first_name"), lit(" - "), col("last_name")).as("full_name")
     )
 
     out
