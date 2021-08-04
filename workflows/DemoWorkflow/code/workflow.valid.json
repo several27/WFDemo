@@ -287,19 +287,6 @@
     },
     "connections" : [ {
       "src" : {
-        "process" : "Customers",
-        "port" : "out"
-      },
-      "tgt" : {
-        "process" : "ByCustomerId",
-        "port" : "left"
-      },
-      "metadata" : {
-        "route" : "e1"
-      },
-      "lineage" : ""
-    }, {
-      "src" : {
         "process" : "Orders",
         "port" : "out"
       },
@@ -350,12 +337,25 @@
         "route" : "e5"
       },
       "lineage" : ""
+    }, {
+      "src" : {
+        "process" : "Customers",
+        "port" : "out"
+      },
+      "tgt" : {
+        "process" : "ByCustomerId",
+        "port" : "left"
+      },
+      "metadata" : {
+        "route" : "e_r1Ok3m_1F"
+      },
+      "lineage" : ""
     } ],
     "groups" : [ ],
     "locked" : false,
     "metainfo" : {
-      "lastUpdated" : 1628087798961,
-      "id" : "id",
+      "lastUpdated" : 1628089316011,
+      "id" : "DemoWorkflow",
       "memory" : 1,
       "imported" : true,
       "language" : "scala",
